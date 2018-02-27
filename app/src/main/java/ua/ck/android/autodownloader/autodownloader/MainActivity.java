@@ -15,6 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText timeOfWaitEditText;
     EditText countOfLoopEditText;
     TextView numberOfLoop;
+    CheckBox plusTimeCheckbox;
     WifiManager wifiManager;
     final Object locker = new Object();
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         timeOfWaitEditText = findViewById(R.id.wait_time_edittext);
         countOfLoopEditText = findViewById(R.id.count_of_loop);
         numberOfLoop = findViewById(R.id.textview_number_of_loop);
+        plusTimeCheckbox = findViewById(R.id.plus_time_checkbox);
 
         //settings for webview
         mainWebView.getSettings().setJavaScriptEnabled(true);
@@ -116,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startButton.setEnabled(enabled);
                 countOfLoopEditText.setEnabled(enabled);
                 timeOfWaitEditText.setEnabled(enabled);
+                plusTimeCheckbox.setEnabled(enabled);
             }
         };
         runOnUiThread(runnable);
@@ -160,6 +164,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         try {
+                            synchronized (plusTimeCheckbox) {
+                                if (plusTimeCheckbox.isChecked()){
+                                    changeButtonText("Додаткові 20 секунд...");
+                                    Thread.sleep(20000);
+                                }
+                            }
                             changeButtonText("Очікування 22 секунди до натискання кнопки");
                             Thread.sleep(22000);
                             final String getLink = "document.getElementsByClassName(\'btn btn-danger \')[0].click()";

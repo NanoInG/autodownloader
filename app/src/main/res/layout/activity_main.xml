@@ -37,6 +37,14 @@
         android:layout_marginTop="4dp"
         android:text="Номер повторення:"/>
 
+    <CheckBox
+        android:id="@+id/plus_time_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="center"
+        android:text="+20 секунд"/>
+
     <Button
         android:id="@+id/start_button"
         android:layout_width="match_parent"
