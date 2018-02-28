@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void run() {
                     try {
+                        Log.d("Test threads", "Thread 1 started");
                         changeUiEnabled(false);
                         int countOfLoop = Integer.parseInt(countOfLoopEditText.getText().toString());
                         Long sleepedTime = Long.parseLong(timeOfWaitEditText.getText().toString());
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             changeButtonText("Очікування " + (sleepedTime/1000) + " секунд між повтореннями...");
                             Thread.sleep(sleepedTime);
+                            Log.d("Test threads", "Thread 1 stopped");
                         }
                         changeUiEnabled(true);
                         changeButtonText("Start");
@@ -164,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         try {
+                            Log.d("Test threads", "Thread 2 started");
                             synchronized (plusTimeCheckbox) {
                                 if (plusTimeCheckbox.isChecked()){
                                     changeButtonText("Додаткові 20 секунд...");
@@ -214,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             synchronized (locker) {
                                 locker.notify();
                             }
+                            Log.d("Test threads", "Thread 2 stopped");
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
